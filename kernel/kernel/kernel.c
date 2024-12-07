@@ -2,6 +2,7 @@
 
 #include <kernel/tty.h>
 #include <kernel/pio.h>
+#include <kernel/pic.h>
 
 void kernel_main(void) {
 	term_init();
@@ -19,4 +20,7 @@ void kernel_main(void) {
 	printf("\nHello, kernel World!\nThis is the second line!\nThis is the third line!\nThis is the fourth line!");
 	printf("\nHello, kernel World!\nThis is the second line!\nThis is the third line!\nThis is the fourth line!");
 	// term_setcursorpos(4, 8);
+	pic_init();
+	printf("\n\nPIC successfully initialized");
+
 }
