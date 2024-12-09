@@ -2,6 +2,7 @@
 
 #include <kernel/pic.h>
 #include <kernel/pio.h>
+#include <kernel/tty.h>
 
 #define PIC_MASTER_CMD 0x20
 #define PIC_MASTER_DATA 0x21
@@ -99,6 +100,11 @@ void pic_init() {
  ******************************************************************************/
 void pic_initOffset(uint8_t offset1, uint8_t offset2) {
 
+    asm("CLI   \n\t"
+        :
+        :
+        );
+
     pic_master_data = inb(PIC_MASTER_DATA);
     pic_slave_data = inb(PIC_SLAVE_DATA); 
 
@@ -120,6 +126,14 @@ void pic_initOffset(uint8_t offset1, uint8_t offset2) {
 
     outb(pic_master_data, PIC_MASTER_DATA);
     outb(pic_slave_data, PIC_SLAVE_DATA);
+
+    term_writestring("\nPIC initialized.");
+
+    asm("STI   \n\t"
+        :
+        :
+        );
+
 }
 
 /**************************************************************************//**
